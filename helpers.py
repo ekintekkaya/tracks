@@ -5,8 +5,8 @@ import requests
 
 
 class SpotifyAPI(object):
-    client_id = "575336b37bb34050953a5209834b9220"
-    client_secret = "31f1a41a21de418bbbf51c148d219dd1"
+    client_id = ""
+    client_secret = ""
     access_token = None
 
     def __init__(self):
