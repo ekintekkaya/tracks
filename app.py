@@ -6,6 +6,7 @@ from helpers import SpotifyAPI
 
 app = Flask(__name__)
 
+GENRES_PATH = ""
 
 @app.route('/')
 def dashboard():
@@ -16,7 +17,7 @@ def dashboard():
 def get_tracks(genre):
     if not genre:
         return jsonify(code='error', msg="You should specify a genre")
-    with open('C:/Users/ViraSoft/PycharmProjects/tracks/static/genres.json') as json_file:
+    with open(GENRES_PATH) as json_file:
         data = json.load(json_file)
     genre = genre.lower()
     if genre not in data:
@@ -25,7 +26,6 @@ def get_tracks(genre):
     spotify = SpotifyAPI()
     artist_id = spotify.find_artist_id(genre, artist)
     top_ten_list = spotify.get_top_ten(artist_id)
-    print(top_ten_list)
     return jsonify(code='ok', data=top_ten_list)
 
 
