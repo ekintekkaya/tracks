@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tracks</title>
+</head>
+<body>
+<h4>Please pick a genre:</h4>
+<input type="text" id="track_type">
+<button onclick="getTracks()">Send</button>
+<button onclick="clearTracks()">Clear</button>
+
+
+<div id="track-list" style="display: none">
+
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script>
+    function getTracks() {
+        let track_name = document.getElementById("track_type").value;
+        $.ajax("/tracks/" + track_name, {
+            method: "GET", success: function (result) {
+                if (result.code === "ok") {
+                    $("#track-list").show()
+                    var tracks = result.data
+                    var div = $("#track-list")
+                    div.empty()
+                    div.append("<h4>Top 10 List</h4>")
+
+                    var table = document.createElement("table")
+
+
+
+
+
+                    for (let i = 0; i < tracks.length; i++) {
+                        var tr = document.createElement('tr');
+
+                        var td1 = document.createElement('td');
+                    var td2 = document.createElement('td');
+                    var td3 = document.createElement('td');
+                    var td4 = document.createElement('td');
+
+                    var text1 = document.createElement('p');
+                    var text2 = document.createElement('p');
+                    var image = document.createElement('img');
+                    var btn = document.createElement('button');
+                    btn.innerText = "Preview";
+
+                        text1.innerText = tracks[i].artist;
+                        text2.innerText = tracks[i].track;
+                        image.src = tracks[i].album_image_url;
+                        image.style.width = "65px"
+                        btn.setAttribute("onclick", "window.open('" + tracks[i].preview_url + "', '_blank')");
+
+                        td1.append(text1);
+                        td2.append(text2);
+                        td3.append(image);
+                        td4.append(btn);
+
+                        tr.append(td1, td2, td3, td4);
+                        table.append(tr);
+
+                        console.log(tracks[i]);
+
+                    }
+                    div.append(table)
+
+
+                } else {
+                    alert("Error:\n" + result.msg);
+                    document.getElementById("track_type").value = "";
+                }
+            }
+        });
+    }
+
+    function clearTracks() {
+        var div = $("#track-list")
+        div.empty()
+        document.getElementById("track_type").value = ""
+    }
+
+</script>
+</body>
+</html>
