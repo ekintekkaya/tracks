@@ -8,6 +8,7 @@ app = Flask(__name__)
 
 GENRES_PATH = ""
 
+
 @app.route('/')
 def dashboard():
     return render_template("dashboard.html")
