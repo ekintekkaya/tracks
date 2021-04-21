@@ -3,6 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Tracks</title>
+    <style>
+        table,
+        tr,
+        td {
+            padding: 10px;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
 </head>
 <body>
 <h4>Please pick a genre:</h4>
@@ -29,23 +38,43 @@
 
                     var table = document.createElement("table")
 
+                    var tr = document.createElement('tr');
 
+                    var td1 = document.createElement('td');
+                    var td2 = document.createElement('td');
+                    var td3 = document.createElement('td');
+                    var td4 = document.createElement('td');
+                    var text1 = document.createElement('p');
+                    var text2 = document.createElement('p');
+                    var text3 = document.createElement('p');
+                    var text4 = document.createElement('p');
+                    text1.innerText = "Artist";
+                    text2.innerText = "Song";
+                    text3.innerText = "Album Cover";
+                    text4.innerText = "";
 
+                    td1.append(text1);
+                    td2.append(text2);
+                    td3.append(text3);
+                    td4.append(text4);
+
+                    tr.append(td1, td2, td3, td4);
+                    table.append(tr);
 
 
                     for (let i = 0; i < tracks.length; i++) {
                         var tr = document.createElement('tr');
 
                         var td1 = document.createElement('td');
-                    var td2 = document.createElement('td');
-                    var td3 = document.createElement('td');
-                    var td4 = document.createElement('td');
+                        var td2 = document.createElement('td');
+                        var td3 = document.createElement('td');
+                        var td4 = document.createElement('td');
 
-                    var text1 = document.createElement('p');
-                    var text2 = document.createElement('p');
-                    var image = document.createElement('img');
-                    var btn = document.createElement('button');
-                    btn.innerText = "Preview";
+                        var text1 = document.createElement('p');
+                        var text2 = document.createElement('p');
+                        var image = document.createElement('img');
+                        var btn = document.createElement('button');
+                        btn.innerText = "Preview";
 
                         text1.innerText = tracks[i].artist;
                         text2.innerText = tracks[i].track;
